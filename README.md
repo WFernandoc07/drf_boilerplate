@@ -42,6 +42,10 @@ pip install Django psycopg2-binary python-decouple djangorestframework drf-yasg 
 
 ```
 
+```zsh
+pip install dj-database-url
+```
+
 ## Enviroments
 
 ```py
