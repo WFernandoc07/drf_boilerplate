@@ -49,6 +49,10 @@ pip install whitenoise
 
 python manage.py collectstatic
 ```
+* **Configura CORS en el Servidor Django**
+```zsh
+pip install django-cors-headers
+```
 
 
 ## Enviroments

@@ -44,12 +44,14 @@ INSTALLED_APPS = [
     'drf_yasg',
     'users',
     'authentication',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -182,3 +184,8 @@ EMAIL_USE_TLS = config('MAIL_USE_TLS')
 
 
 STATIC_ROOT=BASE_DIR / 'statics'
+
+CORS_ALLOWED_ORIGINS = [
+    "*",  # Agrega aquí los orígenes permitidos
+    # Otros orígenes permitidos
+]

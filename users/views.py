@@ -4,6 +4,7 @@ from rest_framework import status, permissions
 from drf_yasg.utils import swagger_auto_schema
 from django.shortcuts import get_object_or_404
 from django.core.paginator import Paginator
+from django.http import JsonResponse
 from .serializers import UserSerializer, UserCreateSerializer, UserUpdateSerializer
 from .models import User
 from .schemas import UserSchema
@@ -64,6 +65,14 @@ class UserView(generics.GenericAPIView):
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     
+    def options(request):
+        # Agrega encabezados CORS para permitir solicitudes OPTIONS desde cualquier origen
+        response = JsonResponse({"message": "OPTIONS request handled"})
+        response["Access-Control-Allow-Origin"] = "*"
+        response["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
+        response["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
+        return response
+    
 class UserGetById(generics.GenericAPIView):
     serializer_class = UserSerializer
     http_method_names = ['get', 'patch', 'delete']
@@ -104,4 +113,12 @@ class UserGetById(generics.GenericAPIView):
         record.is_active = False
         record.save()
         return Response(status.HTTP_204_NO_CONTENT)
+    
+    def options(request):
+        # Agrega encabezados CORS para permitir solicitudes OPTIONS desde cualquier origen
+        response = JsonResponse({"message": "OPTIONS request handled"})
+        response["Access-Control-Allow-Origin"] = "*"
+        response["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
+        response["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
+        return response
 
