@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-xiigbqy+k8kyv7b*2t+jm27u_38a^kq97wh89o-5q7sfcp0p12
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['drf-boilerplate-app.onrender.com', '127.0.0.1']
+ALLOWED_HOSTS = ['drf-boilerplate-app.onrender.com', '*']
 
 
 # Application definition
@@ -48,6 +48,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -84,7 +85,7 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": BASE_DIR / "db.sqlite3"
-        #  "NAME": config('DB_NAME'),
+        # "NAME": config('DB_NAME'),
         # "USER": config('DB_USER'),
         # "PASSWORD": config('DB_PASSWORD'),
         # "HOST": config('DB_HOST'),
@@ -128,7 +129,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -178,3 +179,6 @@ EMAIL_HOST_USER = config('MAIL_USERNAME')
 EMAIL_HOST_PASSWORD = config('MAIL_PASSWORD')
 EMAIL_PORT = config('MAIL_PORT')
 EMAIL_USE_TLS = config('MAIL_USE_TLS')
+
+
+STATIC_ROOT=BASE_DIR / 'statics'

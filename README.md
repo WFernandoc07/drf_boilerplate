@@ -38,13 +38,18 @@
 ## PIP
 
 ```ssh
-pip install Django psycopg2-binary python-decouple djangorestframework drf-yasg djangorestframework-simplejwt
+pip install Django psycopg2-binary python-decouple djangorestframework drf-yasg djangorestframework-simplejwt 
 
 ```
 
 ```zsh
 pip install dj-database-url
+
+pip install whitenoise
+
+python manage.py collectstatic
 ```
+
 
 ## Enviroments
 
