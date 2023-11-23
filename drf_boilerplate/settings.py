@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-xiigbqy+k8kyv7b*2t+jm27u_38a^kq97wh89o-5q7sfcp0p12
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['drf-boilerplate-app.onrender.com', '*']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_yasg',
     'users',
+    'vehicles',
+    'rents',
     'authentication',
     'corsheaders',
 ]
@@ -94,6 +96,7 @@ DATABASES = {
         # "PORT": config('DB_PORT'),
     }
 }
+
 DATABASES['default'] = dj_database_url.parse(config('DATABASE_URL'))
 
 
@@ -185,7 +188,5 @@ EMAIL_USE_TLS = config('MAIL_USE_TLS')
 
 STATIC_ROOT=BASE_DIR / 'statics'
 
-CORS_ALLOWED_ORIGINS = [
-    "*",  # Agrega aquí los orígenes permitidos
-    # Otros orígenes permitidos
-]
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True

@@ -24,7 +24,6 @@ class UserView(generics.GenericAPIView):
             operation_description='Este servicio retorna la lista de usuarios',
             manual_parameters=schema.all()           
     )
-    
     def get(self, request):
         query_params = request.query_params
         page = query_params.get('page')
@@ -65,13 +64,6 @@ class UserView(generics.GenericAPIView):
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     
-    def options(request):
-        # Agrega encabezados CORS para permitir solicitudes OPTIONS desde cualquier origen
-        response = JsonResponse({"message": "OPTIONS request handled"})
-        response["Access-Control-Allow-Origin"] = "*"
-        response["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
-        response["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
-        return response
     
 class UserGetById(generics.GenericAPIView):
     serializer_class = UserSerializer
@@ -113,12 +105,4 @@ class UserGetById(generics.GenericAPIView):
         record.is_active = False
         record.save()
         return Response(status.HTTP_204_NO_CONTENT)
-    
-    def options(request):
-        # Agrega encabezados CORS para permitir solicitudes OPTIONS desde cualquier origen
-        response = JsonResponse({"message": "OPTIONS request handled"})
-        response["Access-Control-Allow-Origin"] = "*"
-        response["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
-        response["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
-        return response
 

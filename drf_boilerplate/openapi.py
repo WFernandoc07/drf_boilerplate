@@ -5,9 +5,9 @@ from django.urls import path
 
 views = get_schema_view(
     openapi.Info(
-        title='DRF Boilerplate',
+        title='APP Rental Car',
         default_version='1.0',
-        description='Documentación de los endpoints del boilerplate'
+        description='Documentación de los endpoints del boilerplate - RentalCAr'
     ),
     public=True
 )

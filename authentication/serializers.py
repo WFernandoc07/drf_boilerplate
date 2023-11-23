@@ -10,6 +10,8 @@ from .utils.mailing import Mailing
 class RegisterSerializer(serializers.Serializer):
     username = serializers.CharField(min_length=3, max_length=150)
     email = serializers.EmailField(min_length=6, max_length=150)
+    first_name = serializers.CharField(max_length=150)
+    last_name = serializers.CharField(max_length=150)
     password = serializers.CharField(max_length=12, write_only=True)
     password_confirmation = serializers.CharField(max_length=12, write_only=True)
 

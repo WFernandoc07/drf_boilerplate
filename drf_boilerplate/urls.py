@@ -21,5 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('drf_boilerplate.openapi')),
     path('users/', include('users.urls')),
+    path('vehicles/', include('vehicles.urls')),
+    path('rents/', include('rents.urls')),
     path('auth/', include('authentication.urls'))
 ]

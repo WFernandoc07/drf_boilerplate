@@ -11,6 +11,10 @@ class UserSerializer(serializers.ModelSerializer):
             'created_at', 'updated_at'
         ]
 
+class UserDeepSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
+    username = serializers.CharField()
+    first_name = serializers.CharField()
 
 class UserCreateSerializer(serializers.Serializer):
     username = serializers.CharField(max_length=150)

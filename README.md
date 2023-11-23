@@ -4,13 +4,21 @@
 
 ## Modelos:
 
-- Usuarios (Extender del modelo de Django)
+![Modelo entidad relación](entity_relation_diagram.jpg)
+
+- Users (Extender del modelo de Django)
 
   | campo      | tipo         | constraint |
   | ---------- | ------------ | ---------- |
   | email      | VARCHAR(160) | UNIQUE     |
+  | first_name | VARCHAR(150) |            |
+  | last_name  | VARCHAR(150) |            |
+  | password   | VARCHAR(150) |            |
   | created_at | DATETIME     |            |
   | updated_at | DATETIME     |            |
+
+- Rents
+
 
 ## Caracteristicas:
 
@@ -35,10 +43,12 @@
 7. Despliegue
    - [] Render
 
+## Comandos
+
 ## PIP
 
-```ssh
-pip install Django psycopg2-binary python-decouple djangorestframework drf-yasg djangorestframework-simplejwt 
+```sh
+pip install Django psycopg2-binary python-decouple djangorestframework drf-yasg djangorestframework-simplejwt
 
 ```
 
@@ -49,11 +59,12 @@ pip install whitenoise
 
 python manage.py collectstatic
 ```
-* **Configura CORS en el Servidor Django**
+
+- **Configura CORS en el Servidor Django**
+
 ```zsh
 pip install django-cors-headers
 ```
-
 
 ## Enviroments
 
@@ -73,6 +84,12 @@ DB_PORT=''
   - [Extender el modelo de Usuarios](https://docs.djangoproject.com/en/4.2/topics/auth/customizing/#substituting-a-custom-user-model)
 - ORM
   - [Tipos de datos](https://docs.djangoproject.com/en/4.2/ref/models/fields/#field-types)
+- Relaciones entre serializadores
+   - [Documentación de relación entre serialziadores](https://www.django-rest-framework.org/api-guide/relations/)
+- Vistas genéricas
+   -[GenericApiView](https://www.django-rest-framework.org/api-guide/generic-views/)
+
+
 
 ## Comandos
 
@@ -114,3 +131,8 @@ python manage.py makemigrations <nombre_app>
 ```sh
 python manage.py migrate
 ```
+---
+---
+### Notas
+* PWA aplicaciones híbridas
+* Session Storage, Local Storage, Private State Tokens, 
