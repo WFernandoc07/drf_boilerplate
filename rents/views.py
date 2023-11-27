@@ -75,7 +75,8 @@ class RentGetById(generics.GenericAPIView):
 
     @swagger_auto_schema(
             operation_summary='Enpoint para actualizar una Renta por Id',
-            operation_description='Con este servicio actualizamos una Renta por su Id'
+            operation_description='Con este servicio actualizamos una Renta por su Id',
+            request_body=RentUpdateSerializer
     )
     def patch(self, request, id):
         record = get_object_or_404(Rent, pk=id)

@@ -44,5 +44,25 @@ class RentCreateSerializer(serializers.Serializer):
 class RentUpdateSerializer(serializers.Serializer):
     date_start = serializers.DateTimeField(required=False)
     date_end = serializers.DateTimeField(required=False)
-    user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), required=False)
+    #user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), required=False)
     vehicle = serializers.PrimaryKeyRelatedField(queryset=Vehicle.objects.all(), required=False)
+
+    message = serializers.ReadOnlyField()
+
+    def update(self, instance, validated_data):
+        vehicle = validated_data['vehicle']
+        duration_in_days = (validated_data['date_end'] - validated_data['date_start']).days
+
+        total_pay = duration_in_days * vehicle.price_day
+        validated_data['total_pay'] = total_pay
+
+        vehicle.condition = 'rent'
+        vehicle.save()
+
+        instance.__dict__.update(**validated_data)
+        instance.save()
+
+        validated_data['message'] = f'Renta del cliente ha sido actualizada!'
+
+        print(instance.__dict__)
+        return validated_data
