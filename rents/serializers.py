@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from django.shortcuts import get_object_or_404
 from .models import Rent
 from vehicles.models import Vehicle
 from users.models import User
@@ -37,6 +38,7 @@ class RentCreateSerializer(serializers.Serializer):
 
         vehicle.condition = 'rent'
         vehicle.save()
+        print(validated_data)
 
         return Rent.objects.create(**validated_data)
     
@@ -49,20 +51,35 @@ class RentUpdateSerializer(serializers.Serializer):
 
     message = serializers.ReadOnlyField()
 
+
     def update(self, instance, validated_data):
+        # Trabajamos en Instance
+        # Actualizamos a 'free' el vehiculo de 'instance'
+        vehicle_instance_id = instance.__dict__['vehicle_id']
+        record = Vehicle.objects.get(pk=vehicle_instance_id)
+        record.condition = 'free'
+        record.save()
+
+        # Trabajamos en validate data
+        # Instanciamos vehicle
         vehicle = validated_data['vehicle']
-        duration_in_days = (validated_data['date_end'] - validated_data['date_start']).days
+        # Calculamos total_pay
+        date_end = validated_data['date_end']
+        date_start = validated_data['date_start']
+        duration_in_days = (date_end - date_start).days
 
         total_pay = duration_in_days * vehicle.price_day
+        # Actualizamos total_pay
         validated_data['total_pay'] = total_pay
 
+        # Actualizar la condición del vehiculo a 'rent'
         vehicle.condition = 'rent'
         vehicle.save()
 
         instance.__dict__.update(**validated_data)
         instance.save()
 
-        validated_data['message'] = f'Renta del cliente ha sido actualizada!'
 
-        print(instance.__dict__)
+        validated_data['message'] = f'Renta del cliente ha sido actualizada!'    
         return validated_data
+    

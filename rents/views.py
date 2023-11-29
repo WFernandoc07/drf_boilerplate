@@ -14,7 +14,7 @@ class RentView(generics.GenericAPIView):
     queryset = Rent.objects.all()
     serializer_class = RentSerializer
     http_method_names = ['get', 'post']
-    # permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
 
     @swagger_auto_schema(
         operation_summary='Endpoint para listar Rentas de Vehículos',
@@ -61,7 +61,7 @@ class RentView(generics.GenericAPIView):
 class RentGetById(generics.GenericAPIView):
     serializer_class = RentSerializer
     http_method_names = ['get', 'patch', 'delete']
-    # permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
 
     @swagger_auto_schema(
             operation_summary='Enpoint para obtener una Renta por Id',
@@ -82,6 +82,10 @@ class RentGetById(generics.GenericAPIView):
         record = get_object_or_404(Rent, pk=id)
         serializer = RentUpdateSerializer(record, data=request.data)
         serializer.is_valid(raise_exception=True)
+        
+        print('Request Data: ',request.data['vehicle'])
+        record.vehicle.id = request.data['vehicle']
+        print("Hola soy views:", record.vehicle.id)
         serializer.save()
         return Response(serializer.data, status=status.HTTP_200_OK)
 

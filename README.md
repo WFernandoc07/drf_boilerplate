@@ -1,6 +1,9 @@
 # API RENTAL CAR
 
 El proyecto permite gestionar las rentas de vehículos en una compañia de renta de vehículos.
+* **Despliegue**
+   - [**Render:**](https://drf-boilerplate-app.onrender.com/swagger-ui/)
+   - [**Netlify:**](https://front-rent-car.netlify.app/)
 
 ## Requerimientos del Proyecto
 
@@ -188,4 +191,3 @@ python manage.py runserver
 
 - PWA aplicaciones híbridas
 - Session Storage, Local Storage, Private State Tokens,
-- 
